@@ -39,7 +39,7 @@ GET STARTED
 - **Clone your GitHub repo**
 
   ```bash
-  git clone https://github.com/d-hackmt/flipkart-product-chatbot.git
+  git clone https://github.com/Sindhura942/e-Commerce_Agentic_Bot.git
   ls
   cd TESTING-9
   ls  # You should see the contents of your project
