@@ -1,5 +1,6 @@
 # python stuff
 passlib[bcrypt]
+pandas
 pymongo
 python-dotenv
 
