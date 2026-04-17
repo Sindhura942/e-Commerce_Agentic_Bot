@@ -1,158 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loom & Lumen | Premium Apparel</title>
-    <meta name="description" content="Discover premium luxury streetwear and elegant fashion at Loom & Lumen.">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOOM & LUMEN | Premium Fashion</title>
+    <script>
+      // Early error reporter to catch module/syntax errors
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        function showErr() {
+          const app = document.getElementById('app') || document.body;
+          if (app && !document.getElementById('sys-error')) {
+            const div = document.createElement('div');
+            div.id = 'sys-error';
+            div.style = "background:#1a1a1a; color:#f87171; padding:2rem; margin:2rem; border:1px solid #ef4444; border-radius:1rem; font-family:monospace; z-index:99999; position:relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);";
+            div.innerHTML = `
+              <h2 style="margin-top:0; display:flex; align-items:center; gap:0.5rem;">⚠️ System Error</h2>
+              <p style="margin-bottom:0.5rem;"><strong>Message:</strong> ${msg}</p>
+              <p style="margin-bottom:0.5rem;"><strong>File:</strong> ${url ? url.split('/').pop() : 'inline'}:${lineNo}:${columnNo}</p>
+              <div style="margin-top:1rem; padding:1rem; background:rgba(0,0,0,0.4); border-radius:0.5rem; overflow:auto; max-height:300px; font-size:0.85rem; border:1px solid rgba(255,255,255,0.05); color: #cbd5e1;">
+                ${error?.stack ? error.stack.replace(/</g, '&lt;') : 'No stack trace available.'}
+              </div>
+              <button onclick="location.reload()" style="background:#ef4444; color:white; border:none; padding:0.75rem 1.5rem; border-radius:0.5rem; cursor:pointer; margin-top:1.5rem; font-weight:bold; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">Reload & Retry</button>
+            `;
+            app.prepend(div);
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', showErr);
+        } else {
+          showErr();
+        }
+      };
+    </script>
+    <link rel="icon" href="https://img.icons8.com/ios-filled/50/ffffff/diamond--v1.png" type="image/png">
+    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">LOOM <span>&amp;</span> LUMEN</a>
-            <ul class="nav-links">
-                <li><a href="#categories">Shop</a></li>
-                <li><a href="#featured">Featured</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-            <div class="nav-icons">
-                <button aria-label="Search"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
-                <button aria-label="Cart"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></button>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-bg" style="background-image: url('assets/hero.png');"></div>
-        <div class="hero-content">
-            <h1 class="fade-in-up">Redefine Your Reality.</h1>
-            <p class="fade-in-up delay-1">Premium luxury streetwear crafted for the modern era.</p>
-            <a href="#featured" class="cta-button fade-in-up delay-2">Explore the Collection</a>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section id="categories" class="categories-section">
-            <div class="section-header fade-in-up">
-                <h2>Shop by Category</h2>
-            </div>
-            <div class="category-grid fade-in-up delay-1">
-                <a href="#" class="category-card" style="background-image: url('assets/men.png');">
-                    <div class="category-overlay">
-                        <h3>Men</h3>
-                    </div>
-                </a>
-                <a href="#" class="category-card" style="background-image: url('assets/women.png');">
-                    <div class="category-overlay">
-                        <h3>Women</h3>
-                    </div>
-                </a>
-                <a href="#" class="category-card" style="background: linear-gradient(135deg, #1f1f1f, #0a0a0a);">
-                    <div class="category-overlay">
-                        <h3>Kids</h3>
-                        <p>Boys & Girls</p>
-                    </div>
-                </a>
-                <a href="#" class="category-card" style="background: linear-gradient(135deg, #2a2a2a, #111);">
-                    <div class="category-overlay">
-                        <h3>Accessories</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section id="featured" class="featured-section">
-            <div class="section-header">
-                <h2>New Arrivals</h2>
-                <a href="#" class="view-all">View All</a>
-            </div>
-            
-            <div class="product-grid">
-                <!-- Product 1 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <img src="assets/product1.png" alt="Velvet Obsidian Jacket">
-                        <button class="add-to-cart" aria-label="Add to cart">+</button>
-                    </div>
-                    <div class="product-info">
-                        <h3>Velvet Obsidian Jacket</h3>
-                        <p class="price">$450</p>
-                    </div>
-                </article>
-
-                <!-- Product 2 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <img src="assets/product2.png" alt="Lumen Silk Dress">
-                        <button class="add-to-cart" aria-label="Add to cart">+</button>
-                    </div>
-                    <div class="product-info">
-                        <h3>Lumen Silk Dress</h3>
-                        <p class="price">$520</p>
-                    </div>
-                </article>
-
-                <!-- Product 3 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <img src="assets/product3.png" alt="Aura Street Sneakers">
-                        <button class="add-to-cart" aria-label="Add to cart">+</button>
-                    </div>
-                    <div class="product-info">
-                        <h3>Aura Street Sneakers</h3>
-                        <p class="price">$280</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="banner-section">
-            <div class="banner-content">
-                <h2>The Essence of Loom & Lumen</h2>
-                <p>We weave stories into fabrics, blending ethereal glow with structured elegance. Every piece is a statement.</p>
-                <button class="cta-button outline">Our Story</button>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h2>LOOM <span>&amp;</span> LUMEN</h2>
-                <p>Elevating daily wear to an art form.</p>
-            </div>
-            <div class="footer-links">
-                <div class="link-column">
-                    <h4>Shop</h4>
-                    <a href="#">Men</a>
-                    <a href="#">Women</a>
-                    <a href="#">Kids</a>
-                    <a href="#">Accessories</a>
-                </div>
-                <div class="link-column">
-                    <h4>Help</h4>
-                    <a href="#">FAQ</a>
-                    <a href="#">Shipping</a>
-                    <a href="#">Returns</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Loom & Lumen. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
 </html>
