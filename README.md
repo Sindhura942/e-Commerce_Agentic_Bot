@@ -5,6 +5,8 @@
 [![Pydantic AI](https://img.shields.io/badge/Pydantic_AI-F05023?style=for-the-badge&logo=ai&logoColor=white)](https://pydantic.ai/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 
+![Chatbot Demo Recording](frontend/images/chatbot_demo.webp)
+
 Welcome to **LOOM & LUMEN**, a premium, high-end e-commerce experience driven by Agentic AI. This project showcases a sleek **Glassmorphism UI**, a high-performance **FastAPI Backend**, and an intelligent **Shopping Stylist** powered by **Pydantic AI**.
 
 ---
@@ -64,6 +66,9 @@ graph TD
 - **🤖 AI Shopping Stylist**: An intelligent assistant that doesn't just search—it understands style, trends, and intent.
 - **🛒 Persistent Cart**: Seamless session-based shopping cart handled via MongoDB.
 - **📦 Massive Catalog**: Capable of handling hundreds of products with categorized filtering (Men, Women, Kids).
+
+![Premium UI Preview](frontend/images/hero_preview.png)
+
 - **🔭 Deep Observability**: Integrated with **Pydantic Logfire** for full-stack tracing of API calls and AI tool execution.
 - **🚀 One-Click Demo**: Built-in bulk generator to populate the store with hundreds of fashion items instantly.
 
