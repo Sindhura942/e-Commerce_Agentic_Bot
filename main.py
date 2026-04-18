@@ -43,4 +43,4 @@ app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 if __name__ == "__main__":
     print("⚙️ Starting backend server (FastAPI)...")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)

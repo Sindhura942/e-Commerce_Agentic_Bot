@@ -14,17 +14,17 @@ load_dotenv(dotenv_path=dotenv_path)
 MONGO_URI = os.getenv("MONGO_URI")
 
 if not MONGO_URI:
-    raise ValueError("MONGO_URI not found in .env file")
+    # Fallback to .env for local development
+    dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path=dotenv_path)
+        MONGO_URI = os.getenv("MONGO_URI")
 
-# Initialize MongoDB client and database
-try:
-    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-    # Test the connection
-    client.admin.command('ping')
-    print("✓ Connected to MongoDB successfully")
-except ServerSelectionTimeoutError:
-    print("✗ Failed to connect to MongoDB")
-    raise
+if not MONGO_URI:
+    print("⚠️ WARNING: MONGO_URI not found. Database operations will fail.")
+
+# Initialize MongoDB client (Connection is lazy, no blocking ping)
+client = MongoClient(MONGO_URI or "mongodb://localhost:27017", serverSelectionTimeoutMS=5000)
 
 db = client["ecommerce_db"]
 
