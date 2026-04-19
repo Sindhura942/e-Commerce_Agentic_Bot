@@ -1,11 +1,13 @@
 # 👕 LOOM & LUMEN - AI-Powered Premium E-Commerce ✦
 
+**🚀 Live Demo: [https://e-commerce-493721.web.app/](https://e-commerce-493721.web.app/)**
+
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/atlas)
 [![Pydantic AI](https://img.shields.io/badge/Pydantic_AI-F05023?style=for-the-badge&logo=ai&logoColor=white)](https://pydantic.ai/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 
-![Chatbot Demo Recording](frontend/images/chatbot_demo.webp)
+![Chatbot Demo Recording](https://e-commerce-493721.web.app/images/chatbot_demo.webp)
 
 Welcome to **LOOM & LUMEN**, a premium, high-end e-commerce experience driven by Agentic AI. This project showcases a sleek **Glassmorphism UI**, a high-performance **FastAPI Backend**, and an intelligent **Shopping Stylist** powered by **Pydantic AI**.
 
@@ -13,49 +15,39 @@ Welcome to **LOOM & LUMEN**, a premium, high-end e-commerce experience driven by
 
 ## 🏗️ System Architecture
 
-Below is an interactive visualization of how the components of LOOM & LUMEN interact:
+Below is a visualization of the modern, cloud-native architecture powering the store:
 
 ```mermaid
 graph TD
-    subgraph Frontend ["🎨 Frontend (Vanilla JS + Glassmorphism)"]
-        UI[User Interface]
-        Chat[AI Chatbot Widget]
-        State[Service State Manager]
+    subgraph UI ["🌐 Global Edge (Firebase Hosting)"]
+        Link[https://e-commerce-493721.web.app]
     end
 
-    subgraph Backend ["⚙️ Backend (FastAPI)"]
+    subgraph Frontend ["🎨 Frontend (Vanilla JS + Glassmorphism)"]
+        UI_Logic[User Interface]
+        Chat[AI Chatbot Widget]
+    end
+
+    subgraph Backend ["🚀 Scalable Backend (Google Cloud Run)"]
         API[FastAPI Main]
         ProductsRouter[Products API]
-        CartRouter[Cart API]
         ChatRouter[Chatbot API]
-        OrdersRouter[Orders API]
     end
 
     subgraph Intelligence ["🧠 AI Engine (Pydantic AI)"]
         Agent[Stylist Agent]
-        Tools[Shop Tools: search_products, etc.]
     end
 
-    subgraph Database ["💾 Storage (MongoDB Atlas)"]
+    subgraph Database ["💾 High Availability (MongoDB Atlas)"]
         DB[(ecommerce_db)]
-        CollProducts[Products Collection]
-        CollCarts[Carts Collection]
-        CollOrders[Orders Collection]
     end
 
-    UI <--> API
+    Link --> UI_Logic
+    UI_Logic <--> API
     Chat <--> ChatRouter
     ChatRouter <--> Agent
-    Agent <--> Tools
-    Tools <--> CollProducts
-    
-    ProductsRouter <--> CollProducts
-    CartRouter <--> CollCarts
-    OrdersRouter <--> CollOrders
-    API --- ProductsRouter
-    API --- CartRouter
-    API --- ChatRouter
-    API --- OrdersRouter
+    Agent <--> DB
+    API <--> DB
 ```
 
 ---
@@ -66,11 +58,7 @@ graph TD
 - **🤖 AI Shopping Stylist**: An intelligent assistant that doesn't just search—it understands style, trends, and intent.
 - **🛒 Persistent Cart**: Seamless session-based shopping cart handled via MongoDB.
 - **📦 Massive Catalog**: Capable of handling hundreds of products with categorized filtering (Men, Women, Kids).
-
-![Premium UI Preview](frontend/images/hero_preview.png)
-
-- **🔭 Deep Observability**: Integrated with **Pydantic Logfire** for full-stack tracing of API calls and AI tool execution.
-- **🚀 One-Click Demo**: Built-in bulk generator to populate the store with hundreds of fashion items instantly.
+- **🔭 Deep Observability**: Integrated with **Pydantic Logfire** for full-stack tracing of AI calls and AI tool execution.
 
 ---
 
@@ -108,6 +96,9 @@ sequenceDiagram
 | **AI Framework** | Pydantic AI (Agentic Orchestration) |
 | **LLM Provider** | OpenAI (GPT-4o-mini) |
 | **Database** | MongoDB Atlas (NoSQL) |
+| **Hosting (Global)** | Firebase Hosting (Clean URL & SSL) |
+| **Compute (Backend)** | Google Cloud Run (Autoscaling Containers) |
+| **CI/CD** | GitHub Actions (Automated Builds & Deploys) |
 | **Observability** | Pydantic Logfire |
 
 ---
