@@ -45,7 +45,7 @@ class StoreDeps(BaseModel):
 from tavily import TavilyClient
 import os
 
-tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+# tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 agent = Agent(
     "openai:gpt-4o-mini",
@@ -73,6 +73,12 @@ def search_web_for_fashion(ctx: RunContext[StoreDeps], query: str) -> str:
         query: A concise search query (e.g. "latest winter fashion trends 2024" or "how to style a red dress").
     """
     try:
+        from tavily import TavilyClient
+        api_key = os.getenv("TAVILY_API_KEY")
+        if not api_key:
+            return "Web search is currently disabled (missing TAVILY_API_KEY)."
+        
+        tavily_client = TavilyClient(api_key=api_key)
         response = tavily_client.search(query=query, search_depth="basic", max_results=3)
         results = [f"Source: {res['url']}\nContent: {res['content']}" for res in response.get("results", [])]
         return "\n\n".join(results) if results else "No relevant web information found."
