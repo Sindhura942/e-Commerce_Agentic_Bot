@@ -8,9 +8,12 @@ import os
 
 # Load environment variables from .env file at root
 dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
-load_dotenv(dotenv_path=dotenv_path)
+if os.path.exists(dotenv_path):
+    print(f"📄 [DATABASE] Loading environment from: {dotenv_path}")
+    load_dotenv(dotenv_path=dotenv_path)
 
 # Get MongoDB connection string from environment
+print("🔌 [DATABASE] Connecting to MongoDB...")
 MONGO_URI = os.getenv("MONGO_URI")
 
 if not MONGO_URI:
@@ -21,10 +24,15 @@ if not MONGO_URI:
         MONGO_URI = os.getenv("MONGO_URI")
 
 if not MONGO_URI:
-    print("⚠️ WARNING: MONGO_URI not found. Database operations will fail.")
+    print("⚠️  [DATABASE] WARNING: MONGO_URI not found in system environment.")
+else:
+    # Redact sensitive info for logs
+    safe_uri = MONGO_URI.split("@")[-1] if "@" in MONGO_URI else "HIDDEN"
+    print(f"📡 [DATABASE] Using MongoDB URI: ...@{safe_uri}")
 
 # Initialize MongoDB client (Connection is lazy, no blocking ping)
 client = MongoClient(MONGO_URI or "mongodb://localhost:27017", serverSelectionTimeoutMS=5000)
+print("✅ [DATABASE] MongoClient initialized.")
 
 db = client["ecommerce_db"]
 
