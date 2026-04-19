@@ -11,6 +11,7 @@ How it works:
 
 from fastapi import APIRouter, Body
 from backend.database import products_collection
+from pymongo.errors import PyMongoError
 from pydantic_ai import Agent, RunContext
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
@@ -129,7 +130,11 @@ def search_products(
     if price_filter:
         query["price"] = price_filter
 
-    raw_results = list(products_collection.find(query).limit(8))
+    try:
+        raw_results = list(products_collection.find(query).limit(8))
+    except PyMongoError as e:
+        print(f"❌ [DB ERROR] Chatbot product search failed: {e}")
+        return f"I'm sorry, I'm having trouble connecting to our product database right now. (Error: {str(e)})"
 
     processed = []
     for r in raw_results:

@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Query
 import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 from bson import ObjectId
 from typing import Optional
 
@@ -53,9 +54,16 @@ def get_products(
         if max_price:
             query["price"]["$lte"] = str(max_price)
 
-    total = collection.count_documents(query)
-    skip = (page - 1) * limit
-    products = list(collection.find(query).skip(skip).limit(limit))
+    try:
+        total = collection.count_documents(query)
+        skip = (page - 1) * limit
+        products = list(collection.find(query).skip(skip).limit(limit))
+    except PyMongoError as e:
+        print(f"❌ [DB ERROR] Products fetch failed: {e}")
+        raise HTTPException(
+            status_code=503, 
+            detail=f"Database connection error. Please ensure your MONGO_URI is correct and accessible. Error: {str(e)}"
+        )
 
     return {
         "total": total,

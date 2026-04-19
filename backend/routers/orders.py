@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Cookie
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 from bson import ObjectId
 import os 
 from dotenv import load_dotenv
@@ -40,7 +41,12 @@ def checkout(body: CheckoutRequest, session_id: Optional[str] = Cookie(default=N
     if not session_id:
         raise HTTPException(status_code=400, detail="No cart session found")
 
-    cart = carts.find_one({"session_id": session_id})
+    try:
+        cart = carts.find_one({"session_id": session_id})
+    except PyMongoError as e:
+        print(f"❌ [DB ERROR] Checkout failed during cart lookup: {e}")
+        raise HTTPException(status_code=503, detail="Database error during checkout.")
+
     if not cart or not cart.get("items"):
         raise HTTPException(status_code=400, detail="Cart is empty")
 

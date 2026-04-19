@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Cookie
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 from bson import ObjectId
 import os 
 from dotenv import load_dotenv
@@ -32,11 +33,15 @@ class UpdateQuantity(BaseModel):
 
 
 def get_or_create_cart(session_id: str):
-    cart = carts.find_one({"session_id": session_id})
-    if not cart:
-        cart = {"session_id": session_id, "items": []}
-        carts.insert_one(cart)
-    return cart
+    try:
+        cart = carts.find_one({"session_id": session_id})
+        if not cart:
+            cart = {"session_id": session_id, "items": []}
+            carts.insert_one(cart)
+        return cart
+    except PyMongoError as e:
+        print(f"❌ [DB ERROR] Cart operation failed: {e}")
+        raise HTTPException(status_code=503, detail="Database error during cart retrieval.")
 
 
 @router.get("/")
