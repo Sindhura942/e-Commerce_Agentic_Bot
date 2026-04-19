@@ -9,9 +9,7 @@ load_dotenv()
 
 router = APIRouter(prefix="/api/products", tags=["products"])
 
-client = MongoClient(os.getenv("MONGO_URI"))
-db = client["ecommerce_db"]
-collection = db["products"]
+from backend.database import products_collection as collection
 
 
 def serialize(doc):

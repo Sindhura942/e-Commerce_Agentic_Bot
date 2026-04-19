@@ -12,11 +12,7 @@ load_dotenv()
 
 router = APIRouter(prefix="/api/orders", tags=["orders"])
 
-client = MongoClient(os.getenv("MONGO_URI"))
-db = client["ecommerce_db"]
-orders = db["orders"]
-carts = db["carts"]
-products_col = db["products"]
+from backend.database import orders_collection as orders, cart_collection as carts, products_collection as products_col
 
 
 class Address(BaseModel):
